@@ -41,8 +41,9 @@ class java {
 		alias => "java-app-dir"
 	}
 
-   exec { "update-alternatives --install /usr/bin/java java ${java::params::java_base}/jdk${java::params::java_version}/bin/java 1999
-":
+   	exec { "update-java-alternatives" :
+		command => "update-alternatives --install /usr/bin/java java ${java::params::java_base}/jdk${java::params::java_version}/bin/java 1999
+",
         path => "/usr/bin:usr/sbin",
         unless => "test /etc/alternatives/java -ef ${java::params::java_base}/jdk${java::params::java_version}/bin/java"
     }   
